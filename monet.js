@@ -63,6 +63,11 @@ function openLink() {
             document.getElementById("primaryDark").style.backgroundColor = palette.primaryDark;
             document.getElementById("primaryLight").style.backgroundColor = palette.primaryLight;
 
+            document.getElementById("accent").innerText = palette.accent;
+            document.getElementById("primary").innerText = palette.primary;
+            document.getElementById("primaryDark").innerText = palette.primaryDark;
+            document.getElementById("primaryLight").innerText = palette.primaryLight;
+
             if (calculateContrastRatio(palette.accent) < 4.5) {
                 document.getElementById("accent").style.color = "black";
             }
@@ -83,6 +88,11 @@ function openLink() {
             document.getElementById("primary-trans").style.backgroundColor = generateRGBA(palette.primary, 0.25);
             document.getElementById("primaryDark-trans").style.backgroundColor = generateRGBA(palette.primaryDark, 0.25);
             document.getElementById("primaryLight-trans").style.backgroundColor = generateRGBA(palette.primaryLight, 0.25);
+
+            document.getElementById("accent-trans").innerText = rgbaToHex(generateRGBA(palette.accent, 0.25));
+            document.getElementById("primary-trans").innerText = rgbaToHex(generateRGBA(palette.primary, 0.25));
+            document.getElementById("primaryDark-trans").innerText = rgbaToHex(generateRGBA(palette.primaryDark, 0.25));
+            document.getElementById("primaryLight-trans").innerText = rgbaToHex(generateRGBA(palette.primaryLight, 0.25));
 
             document.getElementById("navbar").style.backgroundColor = generateRGBA(palette.accent, 0.25);
             document.getElementById("uploadButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
@@ -131,4 +141,35 @@ function calculateContrastRatio(background) {
 
         return contrastRatio;
     }
+}
+
+function rgbaToHex(rgba) {
+    // Check if the input is a valid RGBA string
+    const rgbaRegex = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)$/;
+  
+    if (!rgbaRegex.test(rgba)) {
+      return null; // Invalid input
+    }
+  
+    // Extract RGBA values
+    const [, r, g, b, a] = rgba.match(rgbaRegex);
+  
+    // Convert the values to hexadecimal and ensure they have two digits
+    const toHex = (value) => {
+      const hex = parseInt(value, 10).toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
+    };
+  
+    const hexR = toHex(r);
+    const hexG = toHex(g);
+    const hexB = toHex(b);
+  
+    // Convert the alpha value to a hexadecimal value (between 00 and FF)
+    const alpha = Math.round(parseFloat(a) * 255);
+    const hexA = toHex(alpha);
+  
+    // Construct the hexadecimal color string
+    const hexColor = `#${hexR}${hexG}${hexB}${hexA}`;
+  
+    return hexColor;
 }
