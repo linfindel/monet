@@ -3,7 +3,7 @@ function generateMaterialDesignPalette(imageURL, callback) {
     // Create an image element to load the image
     const img = new Image();
     img.crossOrigin = "Anonymous"; // Enable cross-origin access to the image
-  
+    
     // Set up an event listener for when the image is loaded
     img.onload = function () {
         // Create a Vibrant.js object to extract colors from the image
@@ -93,6 +93,16 @@ function openLink() {
             document.getElementById("primary-trans").innerText = rgbaToHex(generateRGBA(palette.primary, 0.25));
             document.getElementById("primaryDark-trans").innerText = rgbaToHex(generateRGBA(palette.primaryDark, 0.25));
             document.getElementById("primaryLight-trans").innerText = rgbaToHex(generateRGBA(palette.primaryLight, 0.25));
+
+            document.getElementById("accent-trans-inter").style.backgroundColor = generateRGBA(palette.accent, 0.5);
+            document.getElementById("primary-trans-inter").style.backgroundColor = generateRGBA(palette.primary, 0.5);
+            document.getElementById("primaryDark-trans-inter").style.backgroundColor = generateRGBA(palette.primaryDark, 0.5);
+            document.getElementById("primaryLight-trans-inter").style.backgroundColor = generateRGBA(palette.primaryLight, 0.5);
+
+            document.getElementById("accent-trans-inter").innerText = rgbaToHex(generateRGBA(palette.accent, 0.5));
+            document.getElementById("primary-trans-inter").innerText = rgbaToHex(generateRGBA(palette.primary, 0.5));
+            document.getElementById("primaryDark-trans-inter").innerText = rgbaToHex(generateRGBA(palette.primaryDark, 0.5));
+            document.getElementById("primaryLight-trans-inter").innerText = rgbaToHex(generateRGBA(palette.primaryLight, 0.5));
 
             document.getElementById("navbar").style.backgroundColor = generateRGBA(palette.accent, 0.25);
             document.getElementById("uploadButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
