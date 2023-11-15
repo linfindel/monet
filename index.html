@@ -13,10 +13,17 @@
         <h1>Monet Engine</h1>
     </div>
 
-    <button id="uploadButton" onclick="openLink()">
-        <span class="material-symbols-rounded">upload</span>
-        Upload image from URL
-    </button>
+    <div class="row">
+        <button id="uploadButton" onclick="openLink()">
+            <span class="material-symbols-rounded">upload</span>
+            Upload image from URL
+        </button>
+
+        <button style="display: none;" id="export" onclick="exportCSS()">
+            <span id="export-icon" class="material-symbols-rounded">export_notes</span>
+            <span id="export-text">Export as custom NadirCSS</span>
+        </button>
+    </div>
 
     <img id="img" style="max-height: 30vh;">
 

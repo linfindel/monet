@@ -1,3 +1,5 @@
+var palette;
+
 // Function to generate a Material Design color palette from an image URL
 function generateMaterialDesignPalette(imageURL, callback) {
     // Create an image element to load the image
@@ -13,7 +15,7 @@ function generateMaterialDesignPalette(imageURL, callback) {
         // Check if swatches were successfully generated
         if (swatches) {
             // Extract Material Design color palette
-            const palette = {
+            palette = {
                 accent: swatches.Vibrant.getHex(),
                 primaryDark: swatches.DarkVibrant.getHex(),
                 primaryLight: swatches.LightVibrant.getHex(),
@@ -50,6 +52,8 @@ function generateRGBA(hex, alpha) {
 }
 
 function openLink() {
+    document.getElementById("export").style.display = "flex";
+
     var imageURL = prompt("URL:");
 
     generateMaterialDesignPalette(imageURL, (error, palette) => {
@@ -106,12 +110,21 @@ function openLink() {
 
             document.getElementById("navbar").style.backgroundColor = generateRGBA(palette.accent, 0.25);
             document.getElementById("uploadButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+            document.getElementById("export").style.backgroundColor = generateRGBA(palette.accent, 0.25);
 
             document.getElementById("uploadButton").addEventListener("mouseover", () => {
                 document.getElementById("uploadButton").style.backgroundColor = generateRGBA(palette.accent, 0.5);
             });
             document.getElementById("uploadButton").addEventListener("mouseout", () => {
                 document.getElementById("uploadButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+            });
+
+            document.getElementById("export").addEventListener("mouseover", () => {
+                document.getElementById("export").style.backgroundColor = generateRGBA(palette.accent, 0.5);
+            });
+            
+            document.getElementById("export").addEventListener("mouseout", () => {
+                document.getElementById("export").style.backgroundColor = generateRGBA(palette.accent, 0.25);
             });
         }
     });
@@ -182,4 +195,41 @@ function rgbaToHex(rgba) {
     const hexColor = `#${hexR}${hexG}${hexB}${hexA}`;
   
     return hexColor;
+}
+
+function exportCSS(accentColour) {
+    fetch("https://nadir-software.github.io/nadircss/nadir.css")
+    .then(response => response.text())
+    .then(data => {
+        var nadirCSS = data;
+
+        var rgbaDefault = generateRGBA(palette.accent, 0.25);
+        var rgbaHover = generateRGBA(palette.accent, 0.5);
+
+        while (nadirCSS.includes("rgba(0, 89, 255, 0.25)")) {
+            nadirCSS = nadirCSS.replace("rgba(0, 89, 255, 0.25)", rgbaDefault);
+        }
+
+        while (nadirCSS.includes("rgba(0, 89, 255, 0.5)")) {
+            nadirCSS = nadirCSS.replace("rgba(0, 89, 255, 0.5)", rgbaHover);
+        }
+
+        // Copy the URI to the clipboard
+        navigator.clipboard.writeText(nadirCSS)
+            .then(() => {
+                document.getElementById("export-icon").innerText = "done";
+                document.getElementById("export-text").innerText = "CSS copied to clipboard";
+
+                setTimeout(() => {
+                    document.getElementById("export-icon").innerText = "export_notes";
+                    document.getElementById("export-text").innerText = "Export as custom NadirCSS";
+                }, 3000);
+            })
+            .catch(error => {
+                console.error('Error copying to clipboard:', error);
+            });
+    })
+    .catch(error => {
+        console.error('Error fetching CSS:', error);
+    });
 }
