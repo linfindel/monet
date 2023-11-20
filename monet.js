@@ -51,6 +51,105 @@ function generateRGBA(hex, alpha) {
     return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
 }
 
+function uploadFile() {
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = () => {
+        let file = input.files[0]; // Get the first selected file
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                let fileURL = e.target.result;
+                document.getElementById("img").src = fileURL;
+
+                generateMaterialDesignPalette(fileURL, (error, palette) => {
+                    if (error) {
+                        console.error(error);
+                    } else {
+                        console.log("Material Design Palette:", palette);
+            
+                        document.getElementById("accent").style.backgroundColor = palette.accent;
+                        document.getElementById("primary").style.backgroundColor = palette.primary;
+                        document.getElementById("primaryDark").style.backgroundColor = palette.primaryDark;
+                        document.getElementById("primaryLight").style.backgroundColor = palette.primaryLight;
+            
+                        document.getElementById("accent").innerText = palette.accent;
+                        document.getElementById("primary").innerText = palette.primary;
+                        document.getElementById("primaryDark").innerText = palette.primaryDark;
+                        document.getElementById("primaryLight").innerText = palette.primaryLight;
+            
+                        if (calculateContrastRatio(palette.accent) < 4.5) {
+                            document.getElementById("accent").style.color = "black";
+                        }
+            
+                        if (calculateContrastRatio(palette.primary) < 4.5) {
+                            document.getElementById("primary").style.color = "black";
+                        }
+            
+                        if (calculateContrastRatio(palette.primaryDark) < 4.5) {
+                            document.getElementById("primaryDark").style.color = "black";
+                        }
+            
+                        if (calculateContrastRatio(palette.primaryLight) < 4.5) {
+                            document.getElementById("primaryLight").style.color = "black";
+                        }
+            
+                        document.getElementById("accent-trans").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+                        document.getElementById("primary-trans").style.backgroundColor = generateRGBA(palette.primary, 0.25);
+                        document.getElementById("primaryDark-trans").style.backgroundColor = generateRGBA(palette.primaryDark, 0.25);
+                        document.getElementById("primaryLight-trans").style.backgroundColor = generateRGBA(palette.primaryLight, 0.25);
+            
+                        document.getElementById("accent-trans").innerText = rgbaToHex(generateRGBA(palette.accent, 0.25));
+                        document.getElementById("primary-trans").innerText = rgbaToHex(generateRGBA(palette.primary, 0.25));
+                        document.getElementById("primaryDark-trans").innerText = rgbaToHex(generateRGBA(palette.primaryDark, 0.25));
+                        document.getElementById("primaryLight-trans").innerText = rgbaToHex(generateRGBA(palette.primaryLight, 0.25));
+            
+                        document.getElementById("accent-trans-inter").style.backgroundColor = generateRGBA(palette.accent, 0.5);
+                        document.getElementById("primary-trans-inter").style.backgroundColor = generateRGBA(palette.primary, 0.5);
+                        document.getElementById("primaryDark-trans-inter").style.backgroundColor = generateRGBA(palette.primaryDark, 0.5);
+                        document.getElementById("primaryLight-trans-inter").style.backgroundColor = generateRGBA(palette.primaryLight, 0.5);
+            
+                        document.getElementById("accent-trans-inter").innerText = rgbaToHex(generateRGBA(palette.accent, 0.5));
+                        document.getElementById("primary-trans-inter").innerText = rgbaToHex(generateRGBA(palette.primary, 0.5));
+                        document.getElementById("primaryDark-trans-inter").innerText = rgbaToHex(generateRGBA(palette.primaryDark, 0.5));
+                        document.getElementById("primaryLight-trans-inter").innerText = rgbaToHex(generateRGBA(palette.primaryLight, 0.5));
+            
+                        document.getElementById("navbar").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+                        document.getElementById("uploadLinkButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+                        document.getElementById("uploadFileButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+                        document.getElementById("export").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+            
+                        document.getElementById("uploadLinkButton").addEventListener("mouseover", () => {
+                            document.getElementById("uploadLinkButton").style.backgroundColor = generateRGBA(palette.accent, 0.5);
+                        });
+                        document.getElementById("uploadLinkButton").addEventListener("mouseout", () => {
+                            document.getElementById("uploadLinkButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+                        });
+
+                        document.getElementById("uploadFileButton").addEventListener("mouseover", () => {
+                            document.getElementById("uploadFileButton").style.backgroundColor = generateRGBA(palette.accent, 0.5);
+                        });
+                        document.getElementById("uploadFileButton").addEventListener("mouseout", () => {
+                            document.getElementById("uploadFileButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+                        });
+            
+                        document.getElementById("export").addEventListener("mouseover", () => {
+                            document.getElementById("export").style.backgroundColor = generateRGBA(palette.accent, 0.5);
+                        });
+                        
+                        document.getElementById("export").addEventListener("mouseout", () => {
+                            document.getElementById("export").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+                        });
+                    }
+                });
+            };
+            reader.readAsDataURL(file); // Read the file as a data URL
+        }
+    };
+    input.click();
+}
+
 function openLink() {
     document.getElementById("export").style.display = "flex";
 
@@ -109,14 +208,14 @@ function openLink() {
             document.getElementById("primaryLight-trans-inter").innerText = rgbaToHex(generateRGBA(palette.primaryLight, 0.5));
 
             document.getElementById("navbar").style.backgroundColor = generateRGBA(palette.accent, 0.25);
-            document.getElementById("uploadButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+            document.getElementById("uploadLinkButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
             document.getElementById("export").style.backgroundColor = generateRGBA(palette.accent, 0.25);
 
-            document.getElementById("uploadButton").addEventListener("mouseover", () => {
-                document.getElementById("uploadButton").style.backgroundColor = generateRGBA(palette.accent, 0.5);
+            document.getElementById("uploadLinkButton").addEventListener("mouseover", () => {
+                document.getElementById("uploadLinkButton").style.backgroundColor = generateRGBA(palette.accent, 0.5);
             });
-            document.getElementById("uploadButton").addEventListener("mouseout", () => {
-                document.getElementById("uploadButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+            document.getElementById("uploadLinkButton").addEventListener("mouseout", () => {
+                document.getElementById("uploadLinkButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
             });
 
             document.getElementById("export").addEventListener("mouseover", () => {

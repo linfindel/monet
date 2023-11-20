@@ -15,9 +15,14 @@
         </div>
 
         <div class="row">
-            <button id="uploadButton" onclick="openLink()">
+            <button id="uploadLinkButton" onclick="openLink()">
                 <span class="material-symbols-rounded">upload</span>
                 Upload image from URL
+            </button>
+
+            <button id="uploadFileButton" onclick="uploadFile()">
+                <span class="material-symbols-rounded">upload_file</span>
+                Upload from file
             </button>
 
             <button style="display: none;" id="export" onclick="exportCSS()">
