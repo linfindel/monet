@@ -1,61 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Monet Demo</title>
 
-    <link rel="stylesheet" href="https://nadir-software.github.io/nadircss/nadir.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://nadir-software.github.io/nadircss/nadir.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+  </head>
+  <body>
     <div class="navbar-column">
-        <div id="navbar" class="navbar">
-            <h1>Monet Engine</h1>
-        </div>
+      <div id="navbar" class="navbar">
+        <h1>Monet Engine</h1>
+      </div>
 
-        <div class="row">
-            <button id="uploadLinkButton" onclick="openLink()">
-                <span class="material-symbols-rounded">upload</span>
-                Upload image from URL
-            </button>
+      <div class="row">
+        <button id="uploadLinkButton" onclick="openLink()">
+          <span class="material-symbols-rounded">upload</span>
+          Upload image from URL
+        </button>
 
-            <button id="uploadFileButton" onclick="uploadFile()">
-                <span class="material-symbols-rounded">upload_file</span>
-                Upload from file
-            </button>
+        <button id="uploadFileButton" onclick="uploadFile()">
+          <span class="material-symbols-rounded">upload_file</span>
+          Upload from file
+        </button>
 
-            <button style="display: none;" id="export" onclick="exportCSS()">
-                <span id="export-icon" class="material-symbols-rounded">export_notes</span>
-                <span id="export-text">Export as custom NadirCSS</span>
-            </button>
-        </div>
+        <button style="display: none" id="export" onclick="exportCSS()">
+          <span id="export-icon" class="material-symbols-rounded"
+            >export_notes</span
+          >
+          <span id="export-text">Export as custom NadirCSS</span>
+        </button>
+      </div>
     </div>
 
-    <img id="img" style="max-height: 30vh;">
+    <img id="img" style="max-height: 30vh" />
 
     <div class="row">
-        <div id="accent" class="card">Accent</div>
-        <div id="primary" class="card">Primary</div>
-        <div id="primaryDark" class="card">Primary Dark</div>
-        <div id="primaryLight" class="card">Primary Light</div>
-    </div>
-
-    <div class="row">
-        <div id="accent-trans" class="card">Accent Transparent</div>
-        <div id="primary-trans" class="card">Primary Transparent</div>
-        <div id="primaryDark-trans" class="card">Primary Dark Transparent</div>
-        <div id="primaryLight-trans" class="card">Primary Light Transparent</div>
+      <div id="accent" class="card">Accent</div>
+      <div id="primary" class="card">Primary</div>
+      <div id="primaryDark" class="card">Primary Dark</div>
+      <div id="primaryLight" class="card">Primary Light</div>
     </div>
 
     <div class="row">
-        <div id="accent-trans-inter" class="card">Accent Transparent Interact</div>
-        <div id="primary-trans-inter" class="card">Primary Transparent Interact</div>
-        <div id="primaryDark-trans-inter" class="card">Primary Dark Transparent Interact</div>
-        <div id="primaryLight-trans-inter" class="card">Primary Light Transparent Interact</div>
+      <div id="accent-trans" class="card">Accent Transparent</div>
+      <div id="primary-trans" class="card">Primary Transparent</div>
+      <div id="primaryDark-trans" class="card">Primary Dark Transparent</div>
+      <div id="primaryLight-trans" class="card">Primary Light Transparent</div>
+    </div>
+
+    <div class="row">
+      <div id="accent-trans-inter" class="card">
+        Accent Transparent Interact
+      </div>
+      <div id="primary-trans-inter" class="card">
+        Primary Transparent Interact
+      </div>
+      <div id="primaryDark-trans-inter" class="card">
+        Primary Dark Transparent Interact
+      </div>
+      <div id="primaryLight-trans-inter" class="card">
+        Primary Light Transparent Interact
+      </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vibrant.js/1.0.0/Vibrant.min.js"></script>
     <script src="monet.js"></script>
-</body>
+  </body>
 </html>
