@@ -209,6 +209,7 @@ function openLink() {
 
             document.getElementById("navbar").style.backgroundColor = generateRGBA(palette.accent, 0.25);
             document.getElementById("uploadLinkButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+            document.getElementById("uploadFileButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
             document.getElementById("export").style.backgroundColor = generateRGBA(palette.accent, 0.25);
 
             document.getElementById("uploadLinkButton").addEventListener("mouseover", () => {
@@ -216,6 +217,13 @@ function openLink() {
             });
             document.getElementById("uploadLinkButton").addEventListener("mouseout", () => {
                 document.getElementById("uploadLinkButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
+            });
+
+            document.getElementById("uploadFileButton").addEventListener("mouseover", () => {
+                document.getElementById("uploadFileButton").style.backgroundColor = generateRGBA(palette.accent, 0.5);
+            });
+            document.getElementById("uploadFileButton").addEventListener("mouseout", () => {
+                document.getElementById("uploadFileButton").style.backgroundColor = generateRGBA(palette.accent, 0.25);
             });
 
             document.getElementById("export").addEventListener("mouseover", () => {
