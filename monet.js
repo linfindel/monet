@@ -305,7 +305,7 @@ function rgbaToHex(rgba) {
 }
 
 function exportCSS(accentColour) {
-    fetch("https://nadir-software.github.io/nadircss/nadir.css")
+    fetch("https://linfindel.github.io/nadircss/nadir.css")
     .then(response => response.text())
     .then(data => {
         var nadirCSS = data;
